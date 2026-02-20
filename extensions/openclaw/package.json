@@ -1,0 +1,87 @@
+{
+  "name": "openclaw",
+  "displayName": "OpenClaw AI Assistant",
+  "description": "Personal AI assistant powered by OpenClaw and Ollama",
+  "version": "1.0.0",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "main": "./out/extension",
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onView:openclaw.chatView"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "openclaw.openChat",
+        "title": "Open Chat",
+        "category": "OpenClaw"
+      },
+      {
+        "command": "openclaw.startGateway",
+        "title": "Start Gateway",
+        "category": "OpenClaw"
+      },
+      {
+        "command": "openclaw.stopGateway",
+        "title": "Stop Gateway",
+        "category": "OpenClaw"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "openclaw",
+          "title": "OpenClaw",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "views": {
+      "openclaw": [
+        {
+          "type": "webview",
+          "id": "openclaw.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "OpenClaw",
+      "properties": {
+        "openclaw.gatewayPort": {
+          "type": "number",
+          "default": 18789,
+          "description": "Port for the OpenClaw Gateway server"
+        },
+        "openclaw.autoStartGateway": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start the OpenClaw Gateway when the extension activates"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "gulp compile-extension:openclaw",
+    "watch": "gulp watch-extension:openclaw",
+    "build-ext": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../build/gulpfile.extensions.mjs compile-extension:openclaw ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.11"
+  }
+}
